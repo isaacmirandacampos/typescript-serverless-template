@@ -1,0 +1,39 @@
+org: telelaudo
+app: sam-painel-admin
+service: sam-painel-admin
+frameworkVersion: '2'
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  stage: prod
+  region: sa-east-1
+  profile: telelaudo
+  timeout: 60
+  lambdaHashingVersion: '20201221'
+  role: arn:aws:iam::721690112786:role/role-painel-admin-lambda-function
+  vpc:
+    securityGroupIds:
+      - sg-06021eedccccee12e
+    subnetIds:
+      - subnet-0c87488c74851a109
+      - subnet-0dd190d919f9454ad
+      - subnet-011118d8b9f98122b
+  environment:
+    DB: clinux_teleradiologia
+    HOST: db.telelaudo.internal
+    PASSWORD: SStNUJ8g#P?b5%kg
+    PORT: 5432
+    USERNAME: telelaudo
+    JWT_SECRET: eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTYyOTkxNzIzNCwiaWF0IjoxNjI5OTE3MjM0fQ.wqYLriRhQq7lNZE-H8uZThIgSu9Jr0fdLhqoT-BH4yc
+plugins:
+  - serverless-plugin-typescript 
+package:
+  exclude:
+    - .env
+    - .env.example
+functions:
+  api:
+    handler: app/index.lambdaHandler
+    events:
+      - httpApi: '*'
