@@ -34,6 +34,6 @@ package:
     - .env.example
 functions:
   api:
-    handler: app/index.lambdaHandler
+    handler: dist/server/index.lambdaHandler
     events:
       - httpApi: '*'

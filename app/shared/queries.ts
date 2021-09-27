@@ -12,15 +12,3 @@ export async function insert(
       ...data,
     })
 }
-
-export async function select(
-  tableName: string,
-  data: object,
-  uow: Knex.Transaction
-) {
-  await db(tableName)
-    .transacting(uow)
-    .insert({
-      ...data,
-    })
-}
