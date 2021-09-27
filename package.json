@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "scripts": {
     "build": "tsc",
-    "dev": "ts-node-dev --watch --respawn --transpile-only app/server/index",
-    "deploy": "rm -rf dist npm run build && serverless",
-    "test": "set NODE_ENV=test && jest --coverage --verbose",
-    "watch-test": "npm run test -- --watchAll"
+    "dev": "cross-env NODE_ENV=development npx knex migrate:up && ts-node-dev --watch --respawn --transpile-only app/server/index",
+    "deploy": "cross-env NODE_ENV=production rm -rf dist npm run build && serverless",
+    "test": "cross-env NODE_ENV=test npx knex migrate:up && jest --coverage --verbose",
+    "watch-test": "cross-env NODE_ENV=test npm run test -- --watchAll"
   },
   "dependencies": {
     "aws-lambda-fastify": "^1.7.1",
@@ -31,6 +31,7 @@
     "@typescript-eslint/eslint-plugin": "^4.31.2",
     "@typescript-eslint/parser": "^4.31.2",
     "babel-eslint": "^10.1.0",
+    "cross-env": "^7.0.3",
     "eslint": "^7.32.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-config-prettier": "^8.3.0",

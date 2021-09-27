@@ -9,7 +9,7 @@ test(
       url: '/',
     })
     const res = await trx('person').count('id')
-    expect(res[0].count).toEqual('4')
+    expect(res[0].count).toEqual('1')
   })
 )
 
