@@ -10,6 +10,6 @@ export default function (
   _opts: RouteOptions,
   next: HookHandlerDoneFunction
 ) {
-  fastify.get('/', insertPerson)
+  fastify.post('/', insertPerson)
   next()
 }
